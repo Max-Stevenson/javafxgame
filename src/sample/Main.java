@@ -29,7 +29,7 @@ public class Main extends Application {
         Scene firstScene  = new Scene(root);
         primaryStage.setScene(firstScene);
 
-        Canvas canvas = new Canvas(580, 370);
+        Canvas canvas = new Canvas(512, 512);
         root.getChildren().add(canvas);
 
         GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
@@ -47,6 +47,14 @@ public class Main extends Application {
         Image sun = new Image("./sun.png",200, 200, false, false);
 
 
+        AnimatedImage ufo = new AnimatedImage();
+        Image[] imageArray = new Image[6];
+        for (int i = 1; i < 6; i++)
+            imageArray[i] = new Image( "./e_f" + i + ".png" );
+        ufo.frames = imageArray;
+        ufo.duration = 0.100;
+
+
         final long startNanoTime = System.nanoTime();
 
         new AnimationTimer()
@@ -61,7 +69,8 @@ public class Main extends Application {
                 // background image clears canvas
                 graphicsContext.drawImage( space, 0, 0 );
                 graphicsContext.drawImage( earth, x, y );
-                graphicsContext.drawImage( sun, 190, 85 );
+                graphicsContext.drawImage( sun, 156, 156 );
+                graphicsContext.drawImage( ufo.getFrame(t), 450, 25 );
             }
         }.start();
 
